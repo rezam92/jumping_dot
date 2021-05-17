@@ -1,11 +1,11 @@
 name: jumping_dot
 description: Jumping Dot
 version: 0.0.1
-author:
-homepage:
+author: rezam92
+homepage: https://github.com/rezam92/jumping_dot
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
