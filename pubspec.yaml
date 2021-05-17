@@ -1,6 +1,6 @@
 name: jumping_dot
 description: Jumping Dot (null safety)
-version: 0.0.1
+version: 0.0.3
 homepage: https://github.com/rezam92/jumping_dot
 
 environment:
