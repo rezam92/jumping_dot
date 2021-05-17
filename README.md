@@ -9,6 +9,7 @@ Jumping Dot Indicator (null safety)
 ## Usage Jumping Dot
 To use this plugin, add jumping_dot as a [dependency in your pubspec.yaml file]('https://flutter.dev/platform-plugins')
 
+#### Example usage :
 ```aidl
 class Example extends StatelessWidget {
   @override
