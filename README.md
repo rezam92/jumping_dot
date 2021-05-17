@@ -7,7 +7,7 @@ Jumping Dot Indicator
 
 
 ## Usage Jumping Dot
-To use this plugin, add jumping_dot as a [dependency in your pubspec.yaml file]('https://flutter.dev/platform-plugins/').
+To use this plugin, add jumping_dot as a [dependency in your pubspec.yaml file]('https://flutter.dev/platform-plugins').
 
 ## Getting Started flutter
 For help getting started with Flutter, view our 
