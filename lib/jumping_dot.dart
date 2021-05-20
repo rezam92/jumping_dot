@@ -1,4 +1,5 @@
 library jumping_dot;
+
 import 'package:flutter/material.dart';
 
 class DotWidget extends StatelessWidget {
@@ -26,15 +27,20 @@ class DotWidget extends StatelessWidget {
 /// [numberOfDots] number of dots,
 /// [color] color of dots.
 /// [radius] radius of dots.
+/// [animationDuration] animation duration in milliseconds
 class JumpingDots extends StatefulWidget {
   final int numberOfDots;
   final Color color;
   final double radius;
+  final double innerPadding;
+  final Duration animationDuration;
 
   const JumpingDots({
     Key? key,
     this.numberOfDots = 3,
     this.radius = 10,
+    this.innerPadding = 2.5,
+    this.animationDuration = const Duration(milliseconds: 200),
     this.color = const Color(0xfff2c300),
   }) : super(key: key);
 
@@ -47,8 +53,6 @@ class _JumpingDotsState extends State<JumpingDots>
   List<AnimationController>? _animationControllers;
 
   List<Animation<double>> _animations = [];
-
-  int animationDuration = 200;
 
   @override
   void initState() {
@@ -67,9 +71,9 @@ class _JumpingDotsState extends State<JumpingDots>
   void _initAnimation() {
     _animationControllers = List.generate(
       widget.numberOfDots,
-          (index) {
+      (index) {
         return AnimationController(
-            vsync: this, duration: Duration(milliseconds: animationDuration));
+            vsync: this, duration: widget.animationDuration);
       },
     ).toList();
 
@@ -107,10 +111,11 @@ class _JumpingDotsState extends State<JumpingDots>
               animation: _animationControllers![index],
               builder: (context, child) {
                 return Container(
-                  padding: EdgeInsets.all(2.5),
+                  padding: EdgeInsets.all(widget.innerPadding),
                   child: Transform.translate(
                     offset: Offset(0, _animations[index].value),
-                    child: DotWidget(color: widget.color, radius: widget.radius),
+                    child:
+                        DotWidget(color: widget.color, radius: widget.radius),
                   ),
                 );
               },
@@ -121,4 +126,3 @@ class _JumpingDotsState extends State<JumpingDots>
     );
   }
 }
-
