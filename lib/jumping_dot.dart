@@ -35,14 +35,26 @@ class JumpingDots extends StatefulWidget {
   final double innerPadding;
   final Duration animationDuration;
 
-  const JumpingDots({
+  /// Defines how much the animation will offset negatively in the `y` axis.
+  /// Can be either positive or negative, as it'll later be converted into its
+  /// negative value.
+  ///
+  /// Non-finite or zero (0) values are not accepted.
+  final double verticalOffset;
+
+  JumpingDots({
     Key? key,
     this.numberOfDots = 3,
     this.radius = 10,
     this.innerPadding = 2.5,
     this.animationDuration = const Duration(milliseconds: 200),
     this.color = const Color(0xfff2c300),
-  }) : super(key: key);
+    this.verticalOffset = -20,
+  })  : assert(verticalOffset.isFinite,
+            "Non-finite values cannot be set as an animation offset."),
+        assert(verticalOffset != 0,
+            "Zero values (0) cannot be set as an animation offset."),
+        super(key: key);
 
   @override
   _JumpingDotsState createState() => _JumpingDotsState();
@@ -78,8 +90,12 @@ class _JumpingDotsState extends State<JumpingDots>
     ).toList();
 
     for (int i = 0; i < widget.numberOfDots; i++) {
-      _animations.add(
-          Tween<double>(begin: 0, end: -20).animate(_animationControllers![i]));
+      _animations.add(Tween<double>(
+              begin: 0,
+              end:
+                  -widget.verticalOffset.abs() // Ensure the offset is negative.
+              )
+          .animate(_animationControllers![i]));
     }
 
     for (int i = 0; i < widget.numberOfDots; i++) {
