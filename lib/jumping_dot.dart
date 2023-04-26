@@ -42,15 +42,19 @@ class JumpingDots extends StatefulWidget {
   /// Non-finite or zero (0) values are not accepted.
   final double verticalOffset;
 
-  JumpingDots({
-    Key? key,
-    this.numberOfDots = 3,
-    this.radius = 10,
-    this.innerPadding = 2.5,
-    this.animationDuration = const Duration(milliseconds: 200),
-    this.color = const Color(0xfff2c300),
-    this.verticalOffset = -20,
-  })  : assert(verticalOffset.isFinite,
+  // The delay in milliseconds between animations
+  final int delay;
+
+  JumpingDots(
+      {Key? key,
+      this.numberOfDots = 3,
+      this.radius = 10,
+      this.innerPadding = 2.5,
+      this.animationDuration = const Duration(milliseconds: 200),
+      this.color = const Color(0xfff2c300),
+      this.verticalOffset = -20,
+      this.delay = 0})
+      : assert(verticalOffset.isFinite,
             "Non-finite values cannot be set as an animation offset."),
         assert(verticalOffset != 0,
             "Zero values (0) cannot be set as an animation offset."),
@@ -102,13 +106,21 @@ class _JumpingDotsState extends State<JumpingDots>
       _animationControllers![i].addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _animationControllers![i].reverse();
+
           if (i != widget.numberOfDots - 1) {
             _animationControllers![i + 1].forward();
           }
         }
         if (i == widget.numberOfDots - 1 &&
             status == AnimationStatus.dismissed) {
-          _animationControllers![0].forward();
+
+          if (widget.delay == 0) {
+              _animationControllers![0].forward();
+          } else {
+            Future.delayed(Duration(milliseconds: widget.delay), () {
+              _animationControllers![0].forward();
+            });
+          }
         }
       });
     }
