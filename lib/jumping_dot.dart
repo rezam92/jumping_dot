@@ -118,7 +118,9 @@ class _JumpingDotsState extends State<JumpingDots>
               _animationControllers![0].forward();
           } else {
             Future.delayed(Duration(milliseconds: widget.delay), () {
-              _animationControllers![0].forward();
+              if(mounted) {
+                _animationControllers![0].forward();
+              }
             });
           }
         }
