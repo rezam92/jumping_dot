@@ -28,21 +28,16 @@ class DotWidget extends StatelessWidget {
 /// [color] color of dots.
 /// [radius] radius of dots.
 /// [animationDuration] animation duration in milliseconds
+/// [innerPadding] Padding between dots
+/// [verticalOffset] Defines how much the animation will offset negatively in the `y` axis. Can be either positive or negative, as it'll later be converted into its. negative value. Non-finite or zero (0) values are not accepted.
+/// [delay] The delay in milliseconds between animations
 class JumpingDots extends StatefulWidget {
   final int numberOfDots;
   final Color color;
   final double radius;
   final double innerPadding;
   final Duration animationDuration;
-
-  /// Defines how much the animation will offset negatively in the `y` axis.
-  /// Can be either positive or negative, as it'll later be converted into its
-  /// negative value.
-  ///
-  /// Non-finite or zero (0) values are not accepted.
   final double verticalOffset;
-
-  // The delay in milliseconds between animations
   final int delay;
 
   JumpingDots(
