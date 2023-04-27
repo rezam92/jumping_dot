@@ -1,6 +1,6 @@
 name: jumping_dot
 description: We are aiming to provide an animated jumping dot indicators to Flutter developers.
-version: 0.0.4
+version: 0.0.6
 homepage: https://github.com/rezam92/jumping_dot
 
 environment:
