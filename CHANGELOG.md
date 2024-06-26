@@ -10,4 +10,6 @@
 
 ## [0.0.6] - Fix Mounting bugs
 
+## [0.0.7] - Allow customizing animation vertical offset
+
 [comment]: <> (\* TODO: Describe initial release.)
