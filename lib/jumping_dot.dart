@@ -49,18 +49,15 @@ class JumpingDots extends StatefulWidget {
       this.color = const Color(0xfff2c300),
       this.verticalOffset = -20,
       this.delay = 0})
-      : assert(verticalOffset.isFinite,
-            "Non-finite values cannot be set as an animation offset."),
-        assert(verticalOffset != 0,
-            "Zero values (0) cannot be set as an animation offset."),
+      : assert(verticalOffset.isFinite, "Non-finite values cannot be set as an animation offset."),
+        assert(verticalOffset != 0, "Zero values (0) cannot be set as an animation offset."),
         super(key: key);
 
   @override
   _JumpingDotsState createState() => _JumpingDotsState();
 }
 
-class _JumpingDotsState extends State<JumpingDots>
-    with TickerProviderStateMixin {
+class _JumpingDotsState extends State<JumpingDots> with TickerProviderStateMixin {
   List<AnimationController>? _animationControllers;
 
   List<Animation<double>> _animations = [];
@@ -83,16 +80,12 @@ class _JumpingDotsState extends State<JumpingDots>
     _animationControllers = List.generate(
       widget.numberOfDots,
       (index) {
-        return AnimationController(
-            vsync: this, duration: widget.animationDuration);
+        return AnimationController(vsync: this, duration: widget.animationDuration);
       },
     ).toList();
 
     for (int i = 0; i < widget.numberOfDots; i++) {
-      _animations.add(Tween<double>(
-              begin: 0,
-              end:
-                  -widget.verticalOffset.abs() // Ensure the offset is negative.
+      _animations.add(Tween<double>(begin: 0, end: -widget.verticalOffset.abs() // Ensure the offset is negative.
               )
           .animate(_animationControllers![i]));
     }
@@ -106,14 +99,12 @@ class _JumpingDotsState extends State<JumpingDots>
             _animationControllers![i + 1].forward();
           }
         }
-        if (i == widget.numberOfDots - 1 &&
-            status == AnimationStatus.dismissed) {
-
+        if (i == widget.numberOfDots - 1 && status == AnimationStatus.dismissed) {
           if (widget.delay == 0) {
-              _animationControllers![0].forward();
+            _animationControllers![0].forward();
           } else {
             Future.delayed(Duration(milliseconds: widget.delay), () {
-              if(mounted) {
+              if (mounted) {
                 _animationControllers![0].forward();
               }
             });
@@ -139,8 +130,7 @@ class _JumpingDotsState extends State<JumpingDots>
                   padding: EdgeInsets.all(widget.innerPadding),
                   child: Transform.translate(
                     offset: Offset(0, _animations[index].value),
-                    child:
-                        DotWidget(color: widget.color, radius: widget.radius),
+                    child: DotWidget(color: widget.color, radius: widget.radius),
                   ),
                 );
               },
